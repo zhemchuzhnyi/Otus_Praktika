@@ -35,4 +35,41 @@ public abstract class Animal {
     public ColorData getColor() {
         return color;
     }
+
+    public void say(){
+        System.out.println("Я говорю");
+
+    }
+    public void go(){
+        System.out.println("Я иду");
+    }
+
+    public void drink(){
+        System.out.println("Я пью");
+    }
+
+    public void eat(){
+        System.out.println("Я ем");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Привет меня зовут %s, мне %d %s, я вешу - %d кг, мой цвет - %s", name, age, getYearCase(), weight, color.getName());
+    }
+    private String getYearCase() {
+        if (age >= 11 && age <= 14) {
+            return "лет";
+        }
+
+        int remains = age % 10;
+        if(remains == 1) {
+            return "год";
+        }
+
+        if(remains >= 2 && remains <= 4) {
+            return "года";
+        }
+
+        return "лет";
+    }
 }
