@@ -1,4 +1,4 @@
-package animals.pet;
+package animals.pets;
 
 import animals.Animal;
 import data.ColorData;
