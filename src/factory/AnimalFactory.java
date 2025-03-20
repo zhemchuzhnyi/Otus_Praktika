@@ -1,6 +1,5 @@
 package factory;
 
-
 import animals.Animal;
 import animals.birds.Duck;
 import animals.pets.Cat;
@@ -8,14 +7,10 @@ import animals.pets.Dog;
 import data.AnimalTypeData;
 import data.ColorData;
 
-public class AnimalFactory{
-
+public class AnimalFactory {
     private String name;
-
     private int age;
-
     private int weight;
-
     private ColorData colorData;
 
     public AnimalFactory(String name, int age, int weight, ColorData colorData) {
@@ -25,21 +20,16 @@ public class AnimalFactory{
         this.colorData = colorData;
     }
 
-    public Animal create(AnimalTypeData animalTypeData){
+    public Animal create(AnimalTypeData animalTypeData) {
         switch (animalTypeData) {
-            case Cat: {
+            case CAT:
                 return new Cat(name, age, weight, colorData);
-            }
-
-            case Dog: {
+            case DOG:
                 return new Dog(name, age, weight, colorData);
-            }
-
-            case Duck: {
+            case DUCK:
                 return new Duck(name, age, weight, colorData);
-            }
+            default:
+                throw new IllegalArgumentException("Неизвестный тип животного: " + animalTypeData);
         }
-        return null;
     }
-
 }

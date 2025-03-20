@@ -4,11 +4,12 @@ import animals.Animal;
 import data.ColorData;
 
 public class Cat extends Animal {
-
-
-        public Cat(String name, int age, int weight, ColorData color) {
-            super(name, age, weight, color);
+    public Cat(String name, int age, int weight, ColorData colorData) {
+        super(name, age, weight, colorData);
     }
 
-
+    @Override
+    public void say() {
+        System.out.println("Мяу");
+    }
 }
