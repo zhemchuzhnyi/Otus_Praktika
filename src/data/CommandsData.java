@@ -8,14 +8,10 @@ public enum CommandsData {
             return null;
         }
         String trimmedText = text.trim().toUpperCase();
-        if (trimmedText.equals("ADD")) {
-            return ADD;
-        }
-        if (trimmedText.equals("LIST")) {
-            return LIST;
-        }
-        if (trimmedText.equals("EXIT")) {
-            return EXIT;
+        for (CommandsData command : CommandsData.values()) {
+            if (trimmedText.equals(command.name())) {
+                return command;
+            }
         }
         return null;
     }

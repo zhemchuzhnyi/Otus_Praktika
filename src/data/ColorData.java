@@ -20,14 +20,10 @@ public enum ColorData {
             return null;
         }
         String trimmedText = text.trim();
-        if (trimmedText.equalsIgnoreCase("Красный")) {
-            return RED;
-        }
-        if (trimmedText.equalsIgnoreCase("Черный")) {
-            return BLACK;
-        }
-        if (trimmedText.equalsIgnoreCase("Белый")) {
-            return WHITE;
+        for (ColorData colorData : ColorData.values()) {
+            if (trimmedText.equalsIgnoreCase(colorData.getName())) {
+                return colorData;
+            }
         }
         return null;
     }

@@ -3,9 +3,6 @@ package factory;
 import animals.Animal;
 import animals.birds.IFlying;
 import data.CommandsData;
-import animals.birds.Duck;
-import animals.pets.Cat;
-import animals.pets.Dog;
 import data.AnimalTypeData;
 import data.ColorData;
 import tools.ToolsValue;
@@ -20,78 +17,47 @@ public class Main {
 
         while (true) {
             List<String> namesStr = new ArrayList<>();
-            for (CommandsData commandsData: CommandsData.values()) {
+            for (CommandsData commandsData : CommandsData.values()) {
                 namesStr.add(commandsData.name());
             }
 
             System.out.println(String.format("Введите команду: %s", String.join("/", namesStr)));
-            String userCommand = scanner.next().trim();
-            String userCommandUpperCase = userCommand.toUpperCase();
+            String userCommand = scanner.nextLine().trim();
+            CommandsData command = CommandsData.fromString(userCommand);
 
-            CommandsData command;
-            try {
-                command = CommandsData.valueOf(userCommandUpperCase);
-            } catch (IllegalArgumentException e) {
+            if (command == null) {
                 System.out.printf("Команда %s не поддерживается\n", userCommand);
                 continue;
             }
 
             switch (command) {
                 case ADD: {
-                    System.out.println("Какое животное? (cat/dog/duck):");
-                    String typeInput = scanner.next().trim();
-                    if (!tools.isAnimalTypeValid(typeInput)) {
-                        System.out.println("Недопустимый тип");
-                        break;
-                    }
-                    AnimalTypeData type = AnimalTypeData.valueOf(typeInput.toUpperCase());
+                    AnimalTypeData type = getAnimalType(scanner, tools);
+                    if (type == null) continue;
 
-                    System.out.println("Введите имя (буквы):");
-                    String name = scanner.next().trim();
-                    if (!tools.isNameValid(name)) {
-                        System.out.println("Имя должно содержать только буквы");
-                        break;
-                    }
+                    String name = getName(scanner, tools);
+                    if (name == null) continue;
 
-                    System.out.println("Введите возраст:");
-                    String ageInput = scanner.next().trim();
-                    if (!tools.isAgeValid(ageInput)) {
-                        System.out.println("Возраст должен быть числом от 1 до 99");
-                        break;
-                    }
-                    int age = Integer.parseInt(ageInput);
+                    int age = getAge(scanner, tools);
+                    if (age == -1) continue;
 
-                    System.out.println("Введите вес:");
-                    String weightInput = scanner.next().trim();
-                    if (!tools.isNumber(weightInput)) {
-                        System.out.println("Вес должен быть числом от 1 до 999");
-                        break;
-                    }
-                    int weight = Integer.parseInt(weightInput);
+                    int weight = getWeight(scanner, tools);
+                    if (weight == -1) continue;
 
-                    System.out.println("Введите цвет (Красный/Черный/Белый):");
-                    String colorInput = scanner.next().trim();
-                    if (!tools.isColorValid(colorInput)) {
-                        System.out.println("Недопустимый цвет");
-                        break;
-                    }
-                    ColorData color = ColorData.fromString(colorInput);
+                    ColorData color = getColor(scanner, tools);
+                    if (color == null) continue;
 
-                    Animal animal;
-                    if (type == AnimalTypeData.CAT) {
-                        animal = new Cat(name, age, weight, color);
-                    } else if (type == AnimalTypeData.DOG) {
-                        animal = new Dog(name, age, weight, color);
-                    } else {
-                        animal = new Duck(name, age, weight, color);
-                        ((IFlying) animal).fly();
-                    }
+                    AnimalFactory factory = new AnimalFactory(name, age, weight, color);
+                    Animal animal = factory.create(type);
                     animals.add(animal);
                     animal.say();
+                    if (type == AnimalTypeData.DUCK) {
+                        ((IFlying) animal).fly();
+                    }
                     break;
                 }
                 case LIST: {
-                    for (Animal animal: animals) {
+                    for (Animal animal : animals) {
                         System.out.println(animal.toString());
                     }
                     break;
@@ -100,6 +66,67 @@ public class Main {
                     System.exit(0);
                 }
             }
+        }
+    }
+
+    private static AnimalTypeData getAnimalType(Scanner scanner, ToolsValue tools) {
+        while (true) {
+            System.out.println("Какое животное? (cat/dog/duck):");
+            String typeInput = scanner.nextLine().trim();
+            if (!tools.isAnimalTypeValid(typeInput)) {
+                System.out.println("Неверный тип");
+                continue;
+            }
+            return AnimalTypeData.valueOf(typeInput.toUpperCase());
+        }
+    }
+
+    private static String getName(Scanner scanner, ToolsValue tools) {
+        while (true) {
+            System.out.println("Введите имя (буквы):");
+            String name = scanner.nextLine().trim();
+            if (!tools.isNameValid(name)) {
+                System.out.println("Имя должно содержать только буквы");
+                continue;
+            }
+            return name;
+        }
+    }
+
+    private static int getAge(Scanner scanner, ToolsValue tools) {
+        while (true) {
+            System.out.println("Введите возраст:");
+            String ageInput = scanner.nextLine().trim();
+            if (!tools.isAgeValid(ageInput)) {
+                System.out.println("Возраст должен быть числом от 1 до 99");
+                continue;
+            }
+            return Integer.parseInt(ageInput);
+        }
+    }
+
+    private static int getWeight(Scanner scanner, ToolsValue tools) {
+        while (true) {
+            System.out.println("Введите вес:");
+            String weightInput = scanner.nextLine().trim();
+            if (!tools.isNumber(weightInput)) {
+                System.out.println("Вес должен быть числом от 1 до 999");
+                continue;
+            }
+            return Integer.parseInt(weightInput);
+        }
+    }
+
+    private static ColorData getColor(Scanner scanner, ToolsValue tools) {
+        while (true) {
+            System.out.println("Введите цвет (Красный/Черный/Белый):");
+            String colorInput = scanner.nextLine().trim();
+            ColorData color = ColorData.fromString(colorInput);
+            if (color == null) {
+                System.out.println("Недопустимый цвет");
+                continue;
+            }
+            return color;
         }
     }
 }
