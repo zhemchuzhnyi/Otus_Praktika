@@ -1,7 +1,9 @@
 package animals.birds;
 
+import static java.lang.System.*;
+
 public interface IFlying {
     default void fly() {
-        System.out.println("Я лечу");
+        out.println("Я лечу");
     }
 }
