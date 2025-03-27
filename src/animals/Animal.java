@@ -31,37 +31,31 @@ public abstract class Animal {
         return color;
     }
 
-
     public abstract void say();
 
-    public void go(){
+    public void go() {
         System.out.println("Я иду");
     }
 
-    public void drink(){
+    public void drink() {
         System.out.println("Я пью");
     }
 
-    public void eat(){
+    public void eat() {
         System.out.println("Я ем");
     }
 
     @Override
     public String toString() {
-        return String.format("Привет! Меня зовут %s, мне %d %s, я вешу - %d кг, мой цвет - %s", name, age, getYearCase(), weight, color.getName());
+        return "Привет! Меня зовут " + getName() + ", мне " + getAge() + " " + getYearCase() +
+                ", я вешу - " + getWeight() + " кг, мой цвет - " + getColor().getName();
     }
 
     private String getYearCase() {
-        if (age >= 11 && age <= 14) {
-            return "лет";
-        }
+        if (age >= 11 && age <= 14) return "лет";
         int remains = age % 10;
-        if(remains == 1) {
-            return "год";
-        }
-        if(remains >= 2 && remains <= 4) {
-            return "года";
-        }
+        if (remains == 1) return "год";
+        if (remains >= 2 && remains <= 4) return "года";
         return "лет";
     }
 }
