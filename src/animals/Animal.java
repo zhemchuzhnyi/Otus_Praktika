@@ -31,7 +31,7 @@ public abstract class Animal {
         return color;
     }
 
-    // Изменено на абстрактный метод
+
     public abstract void say();
 
     public void go(){
@@ -48,7 +48,7 @@ public abstract class Animal {
 
     @Override
     public String toString() {
-        return String.format("Привет меня зовут %s, мне %d %s, я вешу - %d кг, мой цвет - %s", name, age, getYearCase(), weight, color.getName());
+        return String.format("Привет! Меня зовут %s, мне %d %s, я вешу - %d кг, мой цвет - %s", name, age, getYearCase(), weight, color.getName());
     }
 
     private String getYearCase() {
