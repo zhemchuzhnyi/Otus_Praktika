@@ -28,7 +28,7 @@ public class ToolsValue {
     // Проверка типа животного (cat/dog/duck)
     public boolean isAnimalTypeValid(String typeStr) {
         if (typeStr == null) return false;
-        String trimmedText = typeStr.trim().toLowerCase;
+        String trimmedText = typeStr.trim().toLowerCase();
         return trimmedText.equals("cat") || trimmedText.equals("dog") || trimmedText.equals("duck");
     }
 
