@@ -1,5 +1,7 @@
 package animals.birds;
 
 public interface IFlying {
-    void fly();
+    default void fly() {
+        System.out.println("Я леч");
+    }
 }
