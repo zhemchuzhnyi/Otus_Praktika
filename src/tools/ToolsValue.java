@@ -1,5 +1,8 @@
 package tools;
 
+import data.AnimalTypeData;
+import data.ColorData;
+
 public class ToolsValue {
     public boolean isNumber(String numberStr) {
         if (numberStr == null) return false;
@@ -22,10 +25,10 @@ public class ToolsValue {
     }
 
     public boolean isAnimalTypeValid(String typeStr) {
-        return data.AnimalTypeData.fromString(typeStr) != null;
+        return AnimalTypeData.fromString(typeStr) != null;
     }
 
     public boolean isColorValid(String colorStr) {
-        return data.ColorData.fromString(colorStr) != null;
+        return ColorData.fromString(colorStr) != null;
     }
 }

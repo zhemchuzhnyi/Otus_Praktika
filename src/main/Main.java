@@ -93,6 +93,7 @@ public class Main {
                     animal.go();
                     animal.drink();
                     animal.eat();
+
                     if (animal instanceof IFlying) {
                         ((IFlying) animal).fly();
                     }
