@@ -2,13 +2,11 @@ package animals;
 
 import data.ColorData;
 
-import java.net.ProtocolFamily;
-
 public abstract class Animal {
-    private String name;
-    private int age;
-    private int weight;
-    private ColorData color;
+    private final String name;
+    private final int age;
+    private final int weight;
+    private final ColorData color;
 
     public Animal(String name, int age, int weight, ColorData color) {
         this.name = name;
@@ -59,9 +57,5 @@ public abstract class Animal {
         if (remains == 1) return "год";
         if (remains >= 2 && remains <= 4) return "года";
         return "лет";
-    }
-
-    public ProtocolFamily getType() {
-        return null;
     }
 }

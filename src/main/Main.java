@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import animals.Animal;
 import animals.birds.IFlying;
@@ -9,18 +9,20 @@ import factory.AnimalFactory;
 import tools.ToolsValue;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList animals = new ArrayList();
+        List<Animal> animals = new ArrayList<>();
         ToolsValue tools = new ToolsValue();
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Введите команду (add / list / exit): ");
+            System.out.println("Введите команду (add / list / exit):");
             String input = scanner.nextLine().trim().toUpperCase();
-
             CommandsData command = CommandsData.fromString(input);
+
             if (command == null) {
                 System.out.println("Ошибка: Неверная команда.");
                 continue;
@@ -100,8 +102,7 @@ public class Main {
                     if (animals.isEmpty()) {
                         System.out.println("Список животных пуст.");
                     } else {
-                        for (int i = 0; i < animals.size(); i++) {
-                            Animal a = (Animal) animals.get(i);
+                        for (Animal a : animals) {
                             System.out.println(a);
                         }
                     }
