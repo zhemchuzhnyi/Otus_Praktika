@@ -5,8 +5,8 @@ public enum ColorData {
 
     private final String value;
 
-    ColorData(String name) {
-        this.value = name;
+    ColorData(String value) {
+        this.value = value;
     }
 
     public String getValue() {
