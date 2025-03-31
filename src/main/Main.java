@@ -110,7 +110,7 @@ public class Main {
                     break;
 
                 case EXIT:
-                    System.out.println("Программа завершена.");
+                    System.out.println("Программа завершена.")
                     return;
             }
         }
