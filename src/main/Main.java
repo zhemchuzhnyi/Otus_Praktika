@@ -111,7 +111,7 @@ public class Main {
 
                 case EXIT:
                     System.out.println("Программа завершена.");
-                    return;
+                    return
             }
         }
     }
